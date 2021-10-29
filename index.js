@@ -51,3 +51,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log("tourism server running port", port)
 });
+
+
+// heroku hosting link = https://gentle-river-15524.herokuapp.com/
