@@ -18,6 +18,7 @@ async function run() {
         // console.log("batabase connection done")
         const database = client.db("tourismweb")
         const servicesCollection = database.collection("services")
+        const usersorderCollection = database.collection("usersOrder")
 
         // GET method to collect service data from database 
         app.get('/services', async (req, res) => {
@@ -37,6 +38,23 @@ async function run() {
             res.send(result)
 
         })
+
+        // POST method insert user data to database
+        app.post('/usersorder', async (req, res) => {
+            const userData = req.body
+            // console.log("user order data", userData)
+            const result = await usersorderCollection.insertOne(userData)
+            console.log("user data insert result", result)
+            res.json(result)
+        }) 
+
+        // GET method find user data from database 
+        app.get('/usersorder', async (req, res) => {
+            const cursor = usersorderCollection.find({})
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
     }finally{
         // await client.close()
     }
