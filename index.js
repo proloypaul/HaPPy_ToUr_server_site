@@ -55,6 +55,16 @@ async function run() {
             res.send(result)
         })
 
+        // GET method to delete user from database
+        app.delete('/usersorder/:id', async (req, res) => {
+            const id = req.params.id
+            // console.log("collect user id", id)
+            const qurey = {_id: ObjectId(id)}
+            const result = await usersorderCollection.deleteOne(qurey)
+            console.log("deleted id result", result)
+            res.json(result)
+        })
+
     }finally{
         // await client.close()
     }
